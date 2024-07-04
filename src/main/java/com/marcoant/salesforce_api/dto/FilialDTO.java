@@ -2,10 +2,7 @@ package com.marcoant.salesforce_api.dto;
 
 import java.time.LocalDateTime;
 
-import org.modelmapper.ModelMapper;
 import org.springframework.format.annotation.DateTimeFormat;
-
-import com.marcoant.salesforce_api.entity.Filial;
 
 import jakarta.validation.constraints.NotBlank;
 import jakarta.validation.constraints.NotNull;
@@ -37,11 +34,6 @@ public class FilialDTO {
 
     @DateTimeFormat(iso = DateTimeFormat.ISO.DATE_TIME)
     private LocalDateTime ultimaAtualizacao;
-
-    public static FilialDTO fromFilialDTO(Filial filial) {
-        ModelMapper modelMapper = new ModelMapper();
-        return modelMapper.map(filial, FilialDTO.class);
-    }
 
     public String getNome() {
         return nome;

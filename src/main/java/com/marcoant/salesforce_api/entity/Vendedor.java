@@ -11,8 +11,6 @@ import jakarta.persistence.Enumerated;
 import jakarta.persistence.GeneratedValue;
 import jakarta.persistence.GenerationType;
 import jakarta.persistence.Id;
-import jakarta.persistence.JoinColumn;
-import jakarta.persistence.ManyToOne;
 import jakarta.persistence.Table;
 import jakarta.validation.constraints.Email;
 import jakarta.validation.constraints.NotBlank;
@@ -52,9 +50,8 @@ public class Vendedor {
     @Column(name = "tipo_contratacao")
     private TipoContratacaoEnum tipoContratacao;
 
-    @ManyToOne
-    @JoinColumn(name = "filial_id")
-    private Filial filial;
+    @Column(nullable = false)
+    private Long filialId; 
 
     public Long getId() {
         return id;
@@ -112,11 +109,11 @@ public class Vendedor {
         this.tipoContratacao = tipoContratacao;
     }
 
-    public Filial getFilial() {
-        return filial;
+    public Long getFilialId() {
+        return filialId;
     }
 
-    public void setFilial(Filial filial) {
-        this.filial = filial;
+    public void setFilialId(Long filialId) {
+        this.filialId = filialId;
     }
 }
