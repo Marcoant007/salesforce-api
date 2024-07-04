@@ -3,6 +3,7 @@ package com.marcoant.salesforce_api.services;
 import java.time.LocalDateTime;
 
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.http.HttpStatus;
 import org.springframework.stereotype.Service;
 
 import com.marcoant.salesforce_api.dto.FilialDTO;
@@ -32,7 +33,7 @@ public class FilialService {
             Filial savedFilial = filialRepository.save(filial);
             return FilialDTO.fromFilialDTO(savedFilial);
         } catch (Exception e) {
-            throw new ApiException(e.getMessage(), 500);
+            throw new ApiException(e.getMessage(), HttpStatus.INTERNAL_SERVER_ERROR.value());
         }
     }
 }

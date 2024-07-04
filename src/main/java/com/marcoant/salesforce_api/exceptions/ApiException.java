@@ -1,8 +1,10 @@
 package com.marcoant.salesforce_api.exceptions;
 
+import org.springframework.http.HttpStatus;
+
 public class ApiException extends RuntimeException {
 
-    private int httpStatus = 500;
+    private int httpStatus = HttpStatus.INTERNAL_SERVER_ERROR.value();
 
     public ApiException() {
         super();

@@ -7,12 +7,14 @@ public enum TipoContratacaoEnum {
     CLT,
     PESSOA_JURIDICA;
 
+    private static final int HTTP_STATUS_BAD_REQUEST = 400;
+
     public static TipoContratacaoEnum fromString(String value) {
-        for(TipoContratacaoEnum tipoContratacao : TipoContratacaoEnum.values()) {
-            if(tipoContratacao.toString().equals(value)) {
+        for (TipoContratacaoEnum tipoContratacao : TipoContratacaoEnum.values()) {
+            if (tipoContratacao.toString().equals(value)) {
                 return tipoContratacao;
             }
         }
-        throw new ApiException("Tipo de contratação inválido", 400);
+        throw new ApiException("Tipo de contratação inválido", HTTP_STATUS_BAD_REQUEST);
     }
 }
