@@ -1,68 +1,46 @@
-package com.marcoant.salesforce_api.entity;
+package com.marcoant.salesforce_api.dto;
 
 import java.time.LocalDateTime;
 
-import org.hibernate.annotations.ColumnDefault;
-import org.hibernate.annotations.CreationTimestamp;
-import org.hibernate.annotations.UpdateTimestamp;
-import org.hibernate.validator.constraints.br.CNPJ;
+import org.modelmapper.ModelMapper;
+import org.springframework.format.annotation.DateTimeFormat;
 
-import jakarta.persistence.Column;
-import jakarta.persistence.Entity;
-import jakarta.persistence.GeneratedValue;
-import jakarta.persistence.GenerationType;
-import jakarta.persistence.Id;
-import jakarta.persistence.Table;
+import com.marcoant.salesforce_api.entity.Filial;
+
 import jakarta.validation.constraints.NotBlank;
 import jakarta.validation.constraints.NotNull;
+import jakarta.validation.constraints.Pattern;
 
-@Entity
-@Table(name = "filial")
-public class Filial {
+public class FilialDTO {
     
-    @Id
-    @GeneratedValue(strategy = GenerationType.IDENTITY)
-    private Long id;
-
     @NotBlank(message = "Nome é obrigatório.")
-    @Column(name = "nome")
     private String nome;
-
+    
     @NotBlank(message = "CNPJ é obrigatório.")
-    @CNPJ(message = "CNPJ deve ser válido.")
-    @Column(name = "cnpj", unique = true)
+    @Pattern(regexp = "\\d{14}", message = "CNPJ deve conter exatamente 14 dígitos numéricos.")
     private String cnpj;
 
     @NotBlank(message = "Cidade é obrigatória.")
-    @Column(name = "cidade")
     private String cidade;
 
-    @Column(name = "uf", length = 2)
+    @NotBlank(message = "UF é obrigatória.")
     private String uf;
 
     @NotBlank(message = "Tipo é obrigatório.")
-    @Column(name = "tipo")
     private String tipo;
 
-    @NotNull(message = "Status ativo é obrigatório.")
-    @Column(name = "ativo")
-    @ColumnDefault("false")
+    @NotNull(message = "Ativo é obrigatório.")
     private Boolean ativo;
 
-    @CreationTimestamp
-    @Column(name = "data_cadastro", columnDefinition = "TIMESTAMP")
+    @DateTimeFormat(iso = DateTimeFormat.ISO.DATE_TIME)
     private LocalDateTime dataCadastro;
 
-    @UpdateTimestamp
-    @Column(name = "ultima_atualizacao", columnDefinition = "TIMESTAMP")
+    @DateTimeFormat(iso = DateTimeFormat.ISO.DATE_TIME)
     private LocalDateTime ultimaAtualizacao;
 
-    public Long getId() {
-        return id;
-    }
-
-    public void setId(Long id) {
-        this.id = id;
+    public static FilialDTO fromFilialDTO(Filial filial) {
+        ModelMapper modelMapper = new ModelMapper();
+        return modelMapper.map(filial, FilialDTO.class);
     }
 
     public String getNome() {
