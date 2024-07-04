@@ -12,8 +12,8 @@ import com.marcoant.salesforce_api.services.VendedorService;
 @RequestMapping(value = "/vendedor")
 public class VendedorController {
     
-    @Autowired
-    private VendedorService vendedorService;
+    // @Autowired
+    // private VendedorService vendedorService;
 
     @GetMapping
     public ResponseEntity<String> getVendedor() {
