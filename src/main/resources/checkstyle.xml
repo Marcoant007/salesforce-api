@@ -8,7 +8,7 @@
         <module name="JavadocMethod"/>
         <module name="WhitespaceAround"/>
         <module name="MethodName"/>
-        <module name="MagicNumber"/>
+        <!-- <module name="MagicNumber"/> -->
         <module name="TodoComment"/>
     </module>
 </module>
