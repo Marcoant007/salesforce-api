@@ -9,7 +9,8 @@ import jakarta.validation.constraints.NotNull;
 import jakarta.validation.constraints.Pattern;
 
 public class FilialDTO {
-    
+    private Long id;
+
     @NotBlank(message = "Nome é obrigatório.")
     private String nome;
     
@@ -97,5 +98,13 @@ public class FilialDTO {
 
     public void setUf(String uf) {
         this.uf = uf;
+    }
+
+    public Long getId() {
+        return id;
+    }
+
+    public void setId(Long id) {
+        this.id = id;
     }
 }
