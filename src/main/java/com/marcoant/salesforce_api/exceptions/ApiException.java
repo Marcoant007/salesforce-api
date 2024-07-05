@@ -3,6 +3,7 @@ package com.marcoant.salesforce_api.exceptions;
 public class ApiException extends RuntimeException {
 
     private int httpStatus;
+    private String detailedMessage;
 
     public ApiException() {
         super();
@@ -21,6 +22,12 @@ public class ApiException extends RuntimeException {
         this.httpStatus = httpStatus;
     }
 
+    public ApiException(String message, String detailedMessage, int httpStatus) {
+        super(message);
+        this.detailedMessage = detailedMessage;
+        this.httpStatus = httpStatus;
+    }
+
     public ApiException(Exception e, int httpStatus) {
         super(e);
         this.httpStatus = httpStatus;
@@ -28,5 +35,9 @@ public class ApiException extends RuntimeException {
 
     public int getHttpStatus() {
         return this.httpStatus;
+    }
+
+    public String getDetailedMessage() {
+        return detailedMessage;
     }
 }

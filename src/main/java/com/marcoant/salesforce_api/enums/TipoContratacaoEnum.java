@@ -5,7 +5,7 @@ import com.marcoant.salesforce_api.exceptions.ApiException;
 public enum TipoContratacaoEnum {
     OUTSOURCING,
     CLT,
-    PESSOA_JURIDICA;
+    PJ;
 
     private static final int HTTP_STATUS_BAD_REQUEST = 400;
 

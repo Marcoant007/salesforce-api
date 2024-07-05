@@ -37,12 +37,10 @@ public class Vendedor {
     private LocalDate dataNascimento;
 
     @NotBlank(message = "CPF ou CNPJ é obrigatório.")
-    @Pattern(regexp = "(^\\d{3}\\.\\d{3}\\.\\d{3}\\-\\d{2}$)|(^\\d{2}\\.\\d{3}\\.\\d{3}\\/\\d{4}\\-\\d{2}$)", message = "CPF ou CNPJ deve ser válido.")
     @Column(name = "cpf_cnpj", unique = true)
     private String cpfCnpj;
 
     @NotBlank(message = "E-mail é obrigatório.")
-    @Email(message = "E-mail deve ser válido.")
     @Column(name = "email", unique = true)
     private String email;
 
