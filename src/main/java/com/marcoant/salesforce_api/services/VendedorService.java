@@ -9,7 +9,8 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 import com.marcoant.salesforce_api.dto.FilialDTO;
-import com.marcoant.salesforce_api.dto.VendedorDTO;
+import com.marcoant.salesforce_api.dto.ListVendedorDTO;
+import com.marcoant.salesforce_api.dto.CreateVendedorDTO;
 import com.marcoant.salesforce_api.entity.Vendedor;
 import com.marcoant.salesforce_api.exceptions.ApiException;
 import com.marcoant.salesforce_api.repository.VendedorRepository;
@@ -28,13 +29,13 @@ public class VendedorService implements IVendedorService {
     @Autowired
     private FilialService filialService;
 
-    public List<VendedorDTO> getAllVendedores() {
+    public List<CreateVendedorDTO> getAllVendedores() {
         List<Vendedor> vendedores = vendedorRepository.findAll();
-        return VendedorDTO.fromVendedorList(vendedores);
+        return CreateVendedorDTO.fromVendedorList(vendedores);
     }
 
     @Transactional
-    public VendedorDTO createVendedor(VendedorDTO vendedorDTO) {
+    public CreateVendedorDTO createVendedor(CreateVendedorDTO vendedorDTO) {
         try {
             ValidatorUtil.validateDocument(vendedorDTO);
             FilialDTO filialDTO = filialService.getFilialById(vendedorDTO.getFilialId());
@@ -59,7 +60,7 @@ public class VendedorService implements IVendedorService {
             vendedor.setFilialId(filialDTO.getId());
             vendedor.setTipoContratacao(vendedorDTO.getTipoContratacao());
             vendedorRepository.save(vendedor);
-            return VendedorDTO.fromVendedor(vendedor);
+            return CreateVendedorDTO.fromVendedor(vendedor);
         } catch (Exception e) {
             e.printStackTrace();
             logger.error("Erro ao criar vendedor: {}", e.getMessage());
@@ -68,7 +69,7 @@ public class VendedorService implements IVendedorService {
     }
 
     @Transactional
-    public VendedorDTO updateVendedor(Long id, VendedorDTO vendedorDTO) {
+    public CreateVendedorDTO updateVendedor(Long id, CreateVendedorDTO vendedorDTO) {
         try {
             ValidatorUtil.validateDocument(vendedorDTO);
             Optional<Vendedor> vendedorOp = vendedorRepository.findById(id);
@@ -94,7 +95,7 @@ public class VendedorService implements IVendedorService {
             vendedor.setDataNascimento(vendedorDTO.getDataNascimento());
             vendedor.setTipoContratacao(vendedorDTO.getTipoContratacao());
             vendedorRepository.save(vendedor);
-            return VendedorDTO.fromVendedor(vendedor);
+            return CreateVendedorDTO.fromVendedor(vendedor);
 
         } catch (Exception e) {
             e.printStackTrace();
@@ -112,12 +113,37 @@ public class VendedorService implements IVendedorService {
         }
     }
 
-    public VendedorDTO getVendedorById(Long id) {
+    public CreateVendedorDTO getVendedorById(Long id) {
         Optional<Vendedor> vendedor = vendedorRepository.findById(id);
         if (vendedor.isPresent()) {
-            return VendedorDTO.fromVendedor(vendedor.get());
+            return CreateVendedorDTO.fromVendedor(vendedor.get());
         }
         throw new ApiException("Vendedor não encontrado", 404);
+    }
+
+    public ListVendedorDTO getVendedorWithFilial(String matricula) {
+        Optional<Vendedor> vendedorOp = vendedorRepository.findByMatricula(matricula);
+        if (!vendedorOp.isPresent()) {
+            throw new ApiException("Vendedor não encontrado", 404);
+        }
+
+        Vendedor vendedor = vendedorOp.get();
+        FilialDTO filialDTO = filialService.getFilialById(vendedor.getFilialId());
+        if (filialDTO == null) {
+            throw new ApiException("Filial não encontrada", 404);
+        }
+
+        ListVendedorDTO listVendedorDTO = new ListVendedorDTO();
+        listVendedorDTO.setMatricula(vendedor.getMatricula());
+        listVendedorDTO.setNome(vendedor.getNome());
+        listVendedorDTO.setDataNascimento(vendedor.getDataNascimento());
+        listVendedorDTO.setCpfCnpj(vendedor.getCpfCnpj());
+        listVendedorDTO.setEmail(vendedor.getEmail());
+        listVendedorDTO.setTipoContratacao(vendedor.getTipoContratacao());
+        listVendedorDTO.setFilialId(vendedor.getFilialId());
+        listVendedorDTO.setFilial(filialDTO);
+
+        return listVendedorDTO;
     }
 
 }

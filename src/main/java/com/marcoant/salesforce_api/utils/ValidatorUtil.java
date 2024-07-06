@@ -3,7 +3,7 @@ package com.marcoant.salesforce_api.utils;
 import java.util.UUID;
 import java.util.regex.Pattern;
 
-import com.marcoant.salesforce_api.dto.VendedorDTO;
+import com.marcoant.salesforce_api.dto.CreateVendedorDTO;
 import com.marcoant.salesforce_api.enums.TipoContratacaoEnum;
 
 public class ValidatorUtil {
@@ -14,7 +14,7 @@ public class ValidatorUtil {
         return EMAIL_PATTERN.matcher(email).matches();
     }
 
-    public static void validateDocument(VendedorDTO vendedorDTO) {
+    public static void validateDocument(CreateVendedorDTO vendedorDTO) {
         if (vendedorDTO.getTipoContratacao() == TipoContratacaoEnum.PJ) {
             if (!DocUtil.isValidCNPJ(vendedorDTO.getCpfCnpj())) {
                 throw new IllegalArgumentException("CNPJ inválido");

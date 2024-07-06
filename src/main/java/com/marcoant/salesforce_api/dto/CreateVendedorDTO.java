@@ -14,7 +14,7 @@ import jakarta.validation.constraints.Past;
 
 import org.modelmapper.ModelMapper;
 
-public class VendedorDTO {
+public class CreateVendedorDTO {
 
     private String matricula;
 
@@ -37,13 +37,13 @@ public class VendedorDTO {
 
     private Long filialId;
 
-    public static VendedorDTO fromVendedor(Vendedor vendedor) {
+    public static CreateVendedorDTO fromVendedor(Vendedor vendedor) {
         ModelMapper modelMapper = new ModelMapper();
-        return modelMapper.map(vendedor, VendedorDTO.class);
+        return modelMapper.map(vendedor, CreateVendedorDTO.class);
     }
 
-    public static List<VendedorDTO> fromVendedorList(List<Vendedor> vendedores) {
-        return vendedores.stream().map(VendedorDTO::fromVendedor).collect(Collectors.toList());
+    public static List<CreateVendedorDTO> fromVendedorList(List<Vendedor> vendedores) {
+        return vendedores.stream().map(CreateVendedorDTO::fromVendedor).collect(Collectors.toList());
     }
 
     public String getMatricula() {

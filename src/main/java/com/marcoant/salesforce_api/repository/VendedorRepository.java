@@ -11,4 +11,5 @@ import com.marcoant.salesforce_api.entity.Vendedor;
 public interface VendedorRepository extends JpaRepository<Vendedor, Long> {
     Optional<Vendedor> findByEmail(String email);
     Optional<Vendedor> findByCpfCnpj(String cpfCnpj);
+    Optional<Vendedor> findByMatricula(String matricula);
 }
