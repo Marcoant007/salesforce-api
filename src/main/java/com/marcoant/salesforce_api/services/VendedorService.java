@@ -74,12 +74,12 @@ public class VendedorService implements IVendedorService {
 
         Optional<Vendedor> existingVendedorByEmail = vendedorRepository.findByEmail(vendedorDTO.getEmail());
         if (existingVendedorByEmail.isPresent() && !existingVendedorByEmail.get().getId().equals(id)) {
-            throw new ApiException("E-mail já está em uso por outro usuário", 400);
+            throw new ApiException("E-mail já está em uso", 400);
         }
 
         Optional<Vendedor> existingVendedorByCpfCnpj = vendedorRepository.findByCpfCnpj(vendedorDTO.getCpfCnpj());
         if (existingVendedorByCpfCnpj.isPresent() && !existingVendedorByCpfCnpj.get().getId().equals(id)) {
-            throw new ApiException("CPF ou CNPJ já está em uso por outro usuário", 400);
+            throw new ApiException("CPF ou CNPJ já está em uso", 400);
         }
 
         vendedor.setNome(vendedorDTO.getNome());
