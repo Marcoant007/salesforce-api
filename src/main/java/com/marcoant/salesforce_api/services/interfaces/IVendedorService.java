@@ -9,7 +9,6 @@ public interface IVendedorService {
     CreateVendedorDTO createVendedor(CreateVendedorDTO vendedorDTO);
     CreateVendedorDTO updateVendedor(Long id, CreateVendedorDTO vendedorDTO);
     void deleteVendedor(Long id);
-    CreateVendedorDTO getVendedorById(Long id);
     List<CreateVendedorDTO> getAllVendedores();
     ListVendedorDTO getVendedorWithFilial(String matricula);
 }

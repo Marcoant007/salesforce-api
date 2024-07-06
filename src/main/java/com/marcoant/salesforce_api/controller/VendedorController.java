@@ -30,11 +30,6 @@ public class VendedorController {
     @Autowired
     private VendedorService vendedorService;
 
-    @GetMapping
-    public ResponseEntity<String> getVendedor() {
-        return ResponseEntity.ok("Hello World!");
-    }
-
     @GetMapping("/list")
     @Operation(summary = "Get all sellers", description = "Retrieve a list of all sellers")
     public ResponseEntity<List<CreateVendedorDTO>> listAll() {
@@ -64,15 +59,8 @@ public class VendedorController {
     }
 
     @GetMapping("/matricula/{matricula}/filial")
-    public ResponseEntity<ListVendedorDTO> getVendedorWithFilial(@PathVariable String matricula) {
+    public ResponseEntity<ListVendedorDTO> listWithFilial(@PathVariable String matricula) {
         ListVendedorDTO listVendedorDTO = vendedorService.getVendedorWithFilial(matricula);
         return ResponseEntity.ok(listVendedorDTO);
-    }
-
-    @GetMapping("/matricula/{matricula}/filial")
-    @Operation(summary = "Get a seller with their filial by matricula", description = "Retrieve a seller and their filial by their matricula")
-    public ResponseEntity<CreateVendedorDTO> getById(@PathVariable Long id) {
-        CreateVendedorDTO vendedor = vendedorService.getVendedorById(id);
-        return ResponseEntity.ok(vendedor);
     }
 }
