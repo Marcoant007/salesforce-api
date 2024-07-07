@@ -11,7 +11,7 @@ import com.marcoant.salesforce_api.enums.TipoContratacaoEnum;
 import com.marcoant.salesforce_api.utils.DocUtil;
 import com.marcoant.salesforce_api.utils.ValidatorUtil;
 
-public class ValidatorUtilTeste {
+public class ValidatorUtilTest {
 
      @Test
     public void testIsValidEmail() {

@@ -35,7 +35,7 @@ import com.marcoant.salesforce_api.services.VendedorService;
 import com.marcoant.salesforce_api.unit.services.mocks.VendedorMock;
 
 @ExtendWith(MockitoExtension.class)
-public class VendedorServiceTeste {
+public class VendedorServiceTest {
 
     @Mock
     private VendedorRepository vendedorRepository;
