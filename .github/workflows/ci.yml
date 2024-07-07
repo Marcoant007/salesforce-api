@@ -28,6 +28,8 @@ jobs:
       run: mvn -B package --file pom.xml
 
     - name: Run tests
+      env:
+        SPRING_PROFILES_ACTIVE: test
       run: mvn test
 
     - name: Checkstyle
