@@ -128,6 +128,8 @@ Este projeto utiliza GitHub Actions para CI. O pipeline de CI inclui etapas para
 
 O pipeline é executado automaticamente em cada push e pull request, garantindo que o código esteja sempre em conformidade com os padrões de qualidade.
 
+<img src="https://i.ibb.co/br4Q5y4/Cigif.gif">
+
 ---
 
 
