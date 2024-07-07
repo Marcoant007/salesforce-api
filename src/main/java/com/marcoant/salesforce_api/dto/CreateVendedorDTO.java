@@ -15,6 +15,7 @@ import jakarta.validation.constraints.Past;
 import org.modelmapper.ModelMapper;
 
 public class CreateVendedorDTO {
+    private Long id;
 
     private String matricula;
 
@@ -100,5 +101,13 @@ public class CreateVendedorDTO {
 
     public void setFilialId(Long filialId) {
         this.filialId = filialId;
+    }
+
+    public Long getId() {
+        return id;
+    }
+
+    public void setId(Long id) {
+        this.id = id;
     }
 }

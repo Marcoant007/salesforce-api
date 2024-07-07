@@ -5,6 +5,7 @@ import org.springframework.stereotype.Service;
 
 import com.marcoant.salesforce_api.client.FilialClient;
 import com.marcoant.salesforce_api.dto.FilialDTO;
+import com.marcoant.salesforce_api.exceptions.ApiException;
 import com.marcoant.salesforce_api.services.interfaces.IFilialService;
 
 @Service
@@ -16,7 +17,7 @@ public class FilialService implements IFilialService {
     public FilialDTO getFilialById(Long id) {
         FilialDTO filial = filialClient.getFilialById(id);
         if (filial == null || !filial.getAtivo()) {
-            throw new IllegalArgumentException("Filial não encontrada ou inativa");
+            throw new ApiException("Filial não encontrada ou inativa");
         }
         return filial;
     }
