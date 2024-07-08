@@ -126,6 +126,7 @@
 						<include>**/*Tests.java</include>
 						<include>**/*TestCase.java</include>
 					</includes>
+					<argLine>-Xshare:off</argLine>
 				</configuration>
 			</plugin>
 		</plugins>

@@ -4,15 +4,14 @@ import java.time.LocalDate;
 import java.util.List;
 import java.util.stream.Collectors;
 
+import org.modelmapper.ModelMapper;
+
 import com.marcoant.salesforce_api.entity.Vendedor;
 import com.marcoant.salesforce_api.enums.TipoContratacaoEnum;
 
 import jakarta.validation.constraints.Email;
 import jakarta.validation.constraints.NotBlank;
 import jakarta.validation.constraints.NotNull;
-import jakarta.validation.constraints.Past;
-
-import org.modelmapper.ModelMapper;
 
 public class CreateVendedorDTO {
     private Long id;
@@ -22,8 +21,6 @@ public class CreateVendedorDTO {
     @NotBlank(message = "Nome é obrigatório")
     private String nome;
     
-    @NotNull(message = "Data de nascimento é obrigatória")
-    @Past(message = "Data de nascimento deve ser no passado")
     private LocalDate dataNascimento;
 
     @NotBlank(message = "CPF/CNPJ é obrigatório")
