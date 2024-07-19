@@ -34,11 +34,5 @@ jobs:
 
     - name: Checkstyle
       run: mvn checkstyle:check
-
-  # release:
-  #     needs: [build]
-  #     runs-on: ubuntu-latest
-      
-  #     steps:
  
     
